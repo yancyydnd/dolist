@@ -364,4 +364,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial Render (starts in List View)
     renderListView();
+
 });
