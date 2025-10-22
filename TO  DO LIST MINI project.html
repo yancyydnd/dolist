@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do List</title>
+    <link rel="stylesheet" href="D:\INTCOMP WEB\TO DO LLSIT EXPERIMENT\TO  DO LIST MINI.css"> <!-- Relative path for portability -->
+</head>
+<body>
+    <div class="container">
+        <h1>My To-Do List</h1>
+        
+        <!-- View Toggle -->
+        <div class="view-toggle">
+            <button id="list-view-btn" class="active">List View</button>
+            <button id="calendar-view-btn">Calendar View</button>
+        </div>
+
+        <!-- List View -->
+        <div id="list-view" class="view active">
+            <ul id="task-list">
+                <!-- Tasks will be populated dynamically by JavaScript -->
+            </ul>
+            <div id="no-date-tasks" class="no-date-section">
+                <h3>Tasks with No Due Date</h3>
+                <ul id="no-date-list"></ul>
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="calendar-view" class="view">
+            <!-- Calendar Header -->
+            <div class="calendar-header">
+                <button id="prev-month">&lt;</button>
+                <h2 id="current-month"></h2>
+                <button id="next-month">&gt;</button>
+            </div>
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+                <div class="calendar-day-header">Sun</div>
+                <div class="calendar-day-header">Mon</div>
+                <div class="calendar-day-header">Tue</div>
+                <div class="calendar-day-header">Wed</div>
+                <div class="calendar-day-header">Thu</div>
+                <div class="calendar-day-header">Fri</div>
+                <div class="calendar-day-header">Sat</div>
+                <!-- Days will be populated by JS -->
+            </div>
+            <!-- Filtered Tasks Display -->
+            <div id="filtered-tasks" class="filtered-section">
+                <h3 id="filtered-title">All Tasks</h3>
+                <button id="show-all-btn" style="display: none;">Show All Tasks</button>
+                <ul id="filtered-list"></ul>
+            </div>
+        </div>
+
+        <!-- Add Task Section -->
+        <div class="add-item">
+            <input type="text" id="new-task-input" placeholder="Add a new task...">
+            <input type="date" id="new-task-date" placeholder="Due Date (optional)">
+            <button id="add-task-btn">Add Task</button>
+        </div>
+        <p class="caption">Note: Tasks are saved locally in your browser. Use the date picker for due dates. Overdue tasks are highlighted in red.</p>
+    </div>
+    <script src="To do list.js"></script> <!-- Relative path for portability -->
+</body>
+</html>

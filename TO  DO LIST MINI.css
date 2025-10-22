@@ -1,0 +1,416 @@
+/* Import Google Fonts based on the style guide */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&family=Roboto:wght@300;400;500&family=Lato:wght@300;400;700&family=Nunito+Sans:wght@400;600&display=swap');
+
+/* Global styles */
+body {
+    font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif; /* Body Text fallback */
+    font-size: 16px; /* Body Text size */
+    font-weight: 400; /* Regular */
+    background-color: #000000;
+    margin: 0;
+    padding: 20px;
+    color: #000000;
+    line-height: 1.5; /* Improves readability for body text */
+}
+
+.container {
+    max-width: 800px; /* Slightly wider for calendar */
+    margin: 0 auto;
+    background-color: rgb(211, 111, 17);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-family: 'Poppins', 'Montserrat', 'Open Sans', sans-serif; /* H1 font */
+    font-size: 36px; /* Within 32–40px range */
+    font-weight: 700; /* Bold */
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+/* View Toggle */
+.view-toggle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.view-toggle button {
+    font-family: 'Poppins', 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #dfdfdf;
+    color: #000000;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.view-toggle button.active,
+.view-toggle button:hover {
+    background-color: #4301f8;
+    color: white;
+    border-color: #4301f8;
+}
+
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+/* List View Styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#task-list {
+    min-height: 100px; /* Ensures space even if empty */
+}
+
+li {
+    font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif; /* Body Text */
+    font-size: 16px; /* Body Text size */
+    font-weight: 400; /* Regular */
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-left: 4px solid #4a90e2;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes delete button to the right */
+    position: relative;
+}
+
+li input[type="checkbox"] {
+    margin-right: 15px;
+    transform: scale(1.2);
+    order: -1; /* Puts checkbox at the start */
+}
+
+li .task-text {
+    flex-grow: 1; /* Takes up remaining space */
+    margin-right: 10px;
+}
+
+li .due-date {
+    font-size: 14px;
+    color: #666;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+li.overdue .due-date {
+    color: #e72610;
+}
+
+li.overdue {
+    border-left-color: #e72610;
+    background-color: #fdf2f2;
+}
+
+li .delete-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #e72610;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+li .delete-btn:hover {
+    background-color: #f8f8f8;
+}
+
+li.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    background-color: #e8f5e8;
+    border-left-color: #27ae60;
+}
+
+li.completed .delete-btn {
+    color: #e20f0f; /* This is for x for remove task */
+}
+
+li.completed .due-date {
+    color: #27ae60;
+}
+
+.no-date-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.no-date-section h3 {
+    font-family: 'Roboto', 'Lato', sans-serif; /* H3 font */
+    font-size: 21px; /* Within 20–22px range */
+    font-weight: 500; /* Medium */
+    color: #050000;
+    margin-bottom: 10px;
+}
+
+/* Calendar View Styles */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.calendar-header button:hover {
+    background-color: #dfdfdf;
+}
+
+#current-month {
+    font-family: 'Poppins', 'Roboto', sans-serif; /* H2-like */
+    font-size: 26px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.calendar-day-header {
+    background-color: #4a90e2;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.calendar-day {
+    background-color: #f9f9f9;
+    padding: 10px;
+    text-align: center;
+    min-height: 80px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: 1px solid #eee;
+    color: #000000;
+}
+
+.calendar-day:hover {
+    background-color: #dfdfdf;
+}
+
+.calendar-day.other-month {
+    color: #ccc;
+    background-color: #f5f5f5;
+}
+
+.calendar-day.today {
+    background-color: #e3f2fd;
+    font-weight: bold;
+}
+
+.calendar-day.has-tasks {
+    background-color: #e8f5e8;
+    border-left: 4px solid #27ae60;
+}
+
+.calendar-day.has-tasks.overdue {
+    background-color: #fdf2f2;
+    border-left-color: #e72610;
+}
+
+.calendar-day .day-number {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.calendar-day .task-count {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtered-section {
+    margin-top: 20px;
+}
+
+.filtered-section h3 {
+    font-family: 'Roboto', 'Lato', sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    color: #050000;
+    margin-bottom: 10px;
+}
+
+#show-all-btn {
+    font-family: 'Poppins', 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 15px;
+    background-color: #4301f8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#show-all-btn:hover {
+    background-color: #dfdfdf;
+    color: #000000;
+}
+
+#filtered-list li {
+    border-left-color: #4a90e2; /* Default for filtered */
+}
+
+/* Add Item Section */
+.add-item {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.add-item input[type="text"],
+.add-item input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif; /* Body Text for input */
+    font-size: 16px;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.add-item input[type="date"] {
+    min-width: 150px;
+}
+
+.add-item button {
+    font-family: 'Poppins', 'Lato', sans-serif; /* Buttons font */
+    font-size: 16px; /* Buttons size */
+    font-weight: 700; /* Bold */
+    padding: 10px 20px;
+    background-color: #dfdfdf;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-item button:hover,
+.add-item button:active {
+    background-color: #4301f8;
+    color: white;
+}
+
+.caption {
+    font-family: 'Roboto', 'Nunito Sans', sans-serif; /* Caption font */
+    font-size: 14px; /* Within 12–14px range */
+    font-weight: 400; /* Regular */
+    font-style: italic; /* Optional italic for emphasis, as per guide */
+    text-align: center;
+    color: #000000;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Additional styles for potential H2/H3 if expanded (not used in this page but ready) */
+h2 {
+    font-family: 'Poppins', 'Roboto', sans-serif; /* H2 font */
+    font-size: 26px; /* Within 24–28px range */
+    font-weight: 600; /* Semi-Bold */
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-family: 'Roboto', 'Lato', sans-serif; /* H3 font */
+    font-size: 21px; /* Within 20–22px range */
+    font-weight: 500; /* Medium */
+    color: #050000;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Links example (if added, e.g., <a> tags) */
+a {
+    font-family: 'Poppins', 'Lato', sans-serif; /* Buttons/Links font */
+    font-size: 16px;
+    font-weight: 700; /* Bold */
+    text-transform: uppercase; /* Uppercase as per guide */
+    color: #e24a4a;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 600px) {
+    .add-item {
+        flex-direction: column;
+        align-items: center;
+    }
+    .add-item input,
+    .add-item button {
+        width: 100%;
+        max-width: 300px;
+    }
+    .calendar-day {
+        min-height: 60px;
+        padding: 5px;
+    }
+    .calendar-day .day-number {
+        font-size: 14px;
+    }
+}
